@@ -36,3 +36,31 @@ Assignment Constraints:
 $\sum_{j} x_{ij} = 1 $
 ∀ i
 ***
+
+### Maximum Flow Problem
+
+***
+
+### Shortest Path Problem
+
+***
+
+### Minimum Cost Flow Problem
+
+***
+
+###  Knapsack Problem
+
+***
+
+### Multiple Knapsack Problem
+
+***
+
+### Traveling Saleman Problem
+
+***
+
+### Maximum Clique Problem
+
+***
