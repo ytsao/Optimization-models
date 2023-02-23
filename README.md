@@ -39,6 +39,29 @@ $\sum_{j} x_{ij} = 1 $
 
 ### Maximum Flow Problem
 
+***Sets and Parameters***
+
+__n__ := the set of nodes in the graph <br />
+__last_n__ := the last node in the set n <br />
+__D__ := the capacity matrix <br />
+
+***Decision Variables***
+x<sub>i,j</sub> := real number, the amount of flow between node i and node j <br />
+
+***Model***
+
+Objective Function:
+$Maximize: \sum_{i,j} x_{i,j}$
+
+s.t.<br />
+Capacity Constraints:
+$x_{ij} \leq D_{ij}$
+∀ i,j
+<br />
+Flow Balance Constraints
+$\sum_{i} x_{i,k} = \sum_{j} x_{k,j}$
+∀ k, $D_{i,k} \geq 0, D_{k,j} \geq 0$
+
 ***
 
 ### Shortest Path Problem
