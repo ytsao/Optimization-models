@@ -24,7 +24,7 @@ x<sub>i,j</sub> := {0,1} Whether the item ***i*** be packed in set ***j***
 
 ***Model***
 
-Objective Function: <br />
+Objective Function:
 $Minimize:  \sum_{j} y_j $
 
 s.t.<br />
