@@ -29,7 +29,6 @@ void BinPacking::Build() {
     // Create variables
     IloBoolVarArray y(env, num_sets);
     for (int i = 0; i < num_sets; i++) {
-        y.add(IloBoolVar(env, 0, 1));
         y[i].setName(("y(" + std::to_string(i) + ")").c_str());
     }
 
