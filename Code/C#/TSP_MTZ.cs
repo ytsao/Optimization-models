@@ -93,7 +93,7 @@ namespace optimization_model
             }
 
             // Export lp file & solve it
-            model.ExportModel("TPS.lp");
+            model.ExportModel("TSP.lp");
             if (model.Solve())
             {
                 Console.WriteLine($"Objective Value = {model.GetObjValue()}");
