@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +52,33 @@ namespace optimization_model
                 expr = model.Sum(expr, model.Sum(x[i]));
             }
             model.AddMaximize(expr);
+
+            // Create all of constraints
+            // flow balance constraints
+            ILinearNumExpr flow_balance = model.LinearNumExpr();
+            for(int k = 0; k < n.Count; k++)
+            {
+                if (k != last_n && k != 0)
+                {
+                    for (int i = 0; i < n.Count; i++)
+                    {
+                        if (d[i][k] != 0)
+                        {
+                            flow_balance.AddTerm(1, x[i][k]);
+                        }
+                    }
+
+                    for (int j = 0; j < n.Count; j++)
+                    {
+                        if (d[k][j] != 0)
+                        {
+                            flow_balance.AddTerm(-1, x[k][j]);
+                        }
+                    }
+                    model.AddEq(flow_balance, 0, "FlowBalance");
+                    flow_balance.Clear();
+                }
+            }
 
             // Export lp file & solve it
             model.ExportModel("maximum_flow.lp");
