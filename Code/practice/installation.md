@@ -29,9 +29,13 @@ chmod +x installSCIPopt.sh
 ```
 
 "Please enter path to SCIP Optimization Suite tarball:" -> **scipoptsuite-x.y.z.tgz** (x.y.z refers SCIP version)
+<br/>
 "Intall the SCIP Optimization Suite using..." -> **Makefile [for advanced testing]**
+<br/>
 "Enter soft-link target file or directory for "lib/include/bliss" (return if not needed)" -> **Press enter**.
+<br/>
 "Enter soft-link targe file or directory for "lib/static/libbliss.a" (return if not needed)" -> **Press enter**.
+<br/>
 "Do you wnat to test the suite? (this should not take long) [Y/n]" -> **y**
 
 ```shell
