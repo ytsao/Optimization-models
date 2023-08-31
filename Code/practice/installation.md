@@ -99,7 +99,7 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```
 
 ##### 4-5. SCIP
-```shell
+```console
 cd scip/application/
 cmake ..
 make 
@@ -144,7 +144,7 @@ int main(){
 }
 ```
 
-```console
+```
 touch CMakeLists.txt
 vim CMakeLists.txt
 ```
