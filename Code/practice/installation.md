@@ -144,7 +144,7 @@ int main(){
 }
 ```
 
-```
+```console
 touch CMakeLists.txt
 vim CMakeLists.txt
 ```
