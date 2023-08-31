@@ -13,7 +13,8 @@
 * [Auto Installation File Download](https://gcg.or.rwth-aachen.de/doc-3.5.0/installSCIPopt.sh)
 
 #### 2. Enter WSL and create the folder to install SCIP.
-```shell
+
+```console
 mkdir gcg+scip
 chown username gcg+scip
 cd gcg+scip/
@@ -23,7 +24,8 @@ cd gcg+scip/
     - \\wsl.localhost\Ubuntu-20.04\home\username\gcg+scip\
 
 #### 3. Start install SCIP
-```shell
+
+```console
 chmod +x installSCIPopt.sh
 ./installSCIPopt.sh
 ```
@@ -38,13 +40,14 @@ chmod +x installSCIPopt.sh
 <br/>
 "Do you wnat to test the suite? (this should not take long) [Y/n]" -> **y**
 
-```shell
+```console
 cd scipoptsuite-x.y.z/
 ```
 
 #### 4. Install each package by cmake
 ##### 4-1. SOPLEX
-```shell
+
+```console
 cd soplex/
 mkdir installation
 cd installation/
@@ -55,7 +58,8 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```
     
 ##### 4-2. PAPILO
-```shell
+
+```console
 mkdir installation
 cd installation/
 cmake ..
@@ -64,7 +68,8 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```
 
 ##### 4-3. ZIMPL
-```shell
+
+```console
 cd
 sudo apt-get update
 sudo apt-get installation flex bison
@@ -78,7 +83,8 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```
 
 ##### 4-4. IPOPT
-```shell
+
+```console
 cd 
 sudo apt-get install libblas-dev liblapack-dev
 sudo apt-get install pkgconf
@@ -107,7 +113,7 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```	
 
 ##### 4-6. GCG
-```shell
+```console
 cd gcg/
 mkdir installation
 cd installation/
@@ -117,13 +123,14 @@ sudo make install
 ```
 	
 #### 5. Testing first SCIP program.
-```shell
+```console
 cd 
 mkdir code
 cd code 
 touch main.cpp
 vim main.cpp
 ```
+
 ```C++
 // main.cpp
 #include <bits/stdc++.h>
@@ -137,7 +144,7 @@ int main(){
 }
 ```
 
-```shell
+```console
 touch CMakeLists.txt
 vim CMakeLists.txt
 ```
@@ -153,7 +160,7 @@ include_directories(${GCG_INCLUDE_DIRS})
 add_executable(firstscip main.cpp)
 ```
 
-```shell
+```console
 cmake CMakeLists.txt
 make all
 ./firstscip
