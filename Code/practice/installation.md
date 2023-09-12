@@ -89,6 +89,16 @@ cd
 sudo apt-get install libblas-dev liblapack-dev
 sudo apt-get install pkgconf
 git clone https://github.com/coin-or/Ipopt.git
+
+cd 
+git clone https://github.com/coin-or-tools/ThirdParty-Mumps.git
+cd ThirdParty-Mumps
+./get.Mumps
+./configure
+make
+sudo make install
+cd ~/gcg+scip/scipoptsuite-x.y.z/
+
 cd Ipopt
 mkdir build
 cd build
