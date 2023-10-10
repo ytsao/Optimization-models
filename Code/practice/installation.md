@@ -64,6 +64,7 @@ cd papilo/
 mkdir installation
 cd installation/
 cmake ..
+make
 sudo make install
 cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```
