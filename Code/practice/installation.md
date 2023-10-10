@@ -87,7 +87,6 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ##### 4-4. IPOPT
 
 ```console
-cd 
 sudo apt-get install libblas-dev liblapack-dev
 sudo apt-get install pkgconf
 git clone https://github.com/coin-or/Ipopt.git
