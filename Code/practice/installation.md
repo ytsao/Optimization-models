@@ -114,6 +114,7 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```console
 cd scip/application/
 cmake ..
+cd ..
 make 
 sudo make install
 mkdir installation
