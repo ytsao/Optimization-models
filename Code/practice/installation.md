@@ -74,7 +74,7 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ```console
 cd
 sudo apt-get update
-sudo apt-get installation flex bison
+sudo apt-get install flex bison
 cd /gcg+scip/scipoptsuite-x.y.z/zimpl/
 mkdir installation
 cd installation/
