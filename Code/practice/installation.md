@@ -60,6 +60,7 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 ##### 4-2. PAPILO
 
 ```console
+cd papiloo/
 mkdir installation
 cd installation/
 cmake ..
