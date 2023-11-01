@@ -111,11 +111,6 @@ cd ~/gcg+scip/scipoptsuite-x.y.z/
 
 ##### 4-5. SCIP
 ```console
-cd scip/application/
-cmake ..
-cd ..
-make 
-sudo make install
 mkdir installation
 cd installation/
 cmake .. -DIPOPT_INCLUDE_DIRS=~/gcg+scip/scipoptsuite-8.0.4/Ipopt/build/
