@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/maxflow.dir/MaxFlow.cpp.o -o maxflow  -Wl,-rpath,/usr/local/lib /usr/local/lib/libscip.so.8.0.4.0 
