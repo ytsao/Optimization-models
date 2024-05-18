@@ -3,7 +3,7 @@
 This repository aims to provide the sample code to any beginner to learn how to use different programming languages and optimization solvers to build well-known combinatorial optimization models.
 
 ## Environment Setting
-Our tutorial is based on Linux Ubuntu except C# is based on Windows 11 and Visual Studio 2022. If you are Windows user, you can use following steps to install WSL (Windows Subsystem for Linux).
+Our tutorial is based on Linux Ubuntu except Cplex is based on Windows 11 and Visual Studio 2022. If you are Windows user, you can use following steps to install WSL (Windows Subsystem for Linux).
 
 1. Control Panel -> Programs -> Turn Windows features on or off.
 2. Check "Virtual Machine Platform", "Windows Hypervisor Platform" (Option), "Windows Subsystem for Linux".
