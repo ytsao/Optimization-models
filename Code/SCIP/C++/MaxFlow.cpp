@@ -6,16 +6,10 @@
 void create_distance_matrix(int num_nodes, std::vector<std::vector<int>>* distance_matrix);
 void print_distance_matrix(int num_nodes, const std::vector<std::vector<int>> distance_matrix);
 
-int 
-main(
-    int args,
-    char** argv
-    )
-{
+int main(int args, char** argv){
     std::cout << "Start" << '\n';
     
-    if( args < 2 )
-    {
+    if( args < 2 ){
         std::cerr << "call" << argv[0] << " <number of parameters for maximum flow problem" << std::endl;
         exit(1);
     }
@@ -29,8 +23,7 @@ main(
     create_distance_matrix(num_nodes, & distance_matrix);
     print_distance_matrix(num_nodes, distance_matrix);
 
-    try
-    {
+    try{
         // initialize SCIP object, load default plugins link separators, heuristics, etc.
         SCIP* scip;
         SCIP_CALL_EXC( SCIPcreate(& scip) );
@@ -45,10 +38,8 @@ main(
         
         std::ostringstream namebuf;
         std::vector<std::vector<SCIP_VAR*>> x(num_nodes, std::vector<SCIP_VAR*>(num_nodes));
-        for (int i = 0; i < num_nodes; ++i)
-        {
-            for (int j = 0; j < num_nodes; ++j)
-            {
+        for (int i = 0; i < num_nodes; ++i){
+            for (int j = 0; j < num_nodes; ++j){
                 SCIP_VAR* var_x;
                 namebuf.str("");
                 namebuf << "x#" << i << "#" << j;
@@ -67,8 +58,7 @@ main(
         std::vector<SCIP_CONS*> all_constraints;
 
         // flow balance constraints
-        for (int k = 1; k < num_nodes - 1; ++k)
-        {
+        for (int k = 1; k < num_nodes - 1; ++k){
             SCIP_CONS* cons;
             namebuf.str("");
             namebuf << "flow_balance_" << k;
@@ -76,13 +66,11 @@ main(
             SCIP_CALL_EXC( SCIPcreateConsLinear(scip, & cons, namebuf.str().c_str(), 0, NULL, NULL, 0, 0, 
                                                 TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE) );
             
-            for (int i = 0; i < num_nodes; ++i)
-            {
+            for (int i = 0; i < num_nodes; ++i){
                 if (distance_matrix[i][k])
                     SCIP_CALL_EXC( SCIPaddCoefLinear(scip, cons, x[i][k], 1) );
             }
-            for (int j = 0; j < num_nodes; ++j)
-            {
+            for (int j = 0; j < num_nodes; ++j){
                 if (distance_matrix[k][j])
                     SCIP_CALL_EXC( SCIPaddCoefLinear(scip, cons, x[k][j], -1) );
             }
@@ -92,10 +80,8 @@ main(
         }
 
         // capacity constraints
-        for (int i = 0; i < num_nodes; ++i)
-        {
-            for (int j = 0; j < num_nodes; ++j)
-            {
+        for (int i = 0; i < num_nodes; ++i){
+            for (int j = 0; j < num_nodes; ++j){
                 SCIP_CONS* cons;
                 namebuf.str("");
                 namebuf << "capa_cons_" << i << "_" << j;
@@ -121,19 +107,15 @@ main(
     SCIP_STATUS sln_status = SCIPgetStatus(scip);
     SCIP_SOL* solution = SCIPgetBestSol(scip);
 
-    if (solution == NULL)
-    {
+    if (solution == NULL){
         std::cout << "no solution found" << "\n";
     }
-    else
-    {
+    else{
         double objective_value = SCIPgetSolOrigObj(scip, solution);
         std::cout << "Objective value = " << objective_value << "\n";
         
-        for (int i = 0; i < num_nodes; ++i)
-        {
-            for (int j = 0; j < num_nodes; ++j)
-            {
+        for (int i = 0; i < num_nodes; ++i){
+            for (int j = 0; j < num_nodes; ++j){
                 if (SCIPgetSolVal(scip, solution, x[i][j]) != 0)
                     std::cout << SCIPvarGetName(x[i][j]) << " = " << SCIPgetSolVal(scip, solution, x[i][j]) << "\n";
             }
@@ -143,17 +125,14 @@ main(
 #pragma endregion
 
 #pragma region  free the SCIP environment, and close it.
-        for (int i = 0; i < num_nodes; ++i)
-        {
-            for (int j = 0; j < num_nodes; ++j)
-            {
+        for (int i = 0; i < num_nodes; ++i){
+            for (int j = 0; j < num_nodes; ++j){
                 SCIP_CALL_EXC( SCIPreleaseVar(scip, & x[i][j]) );
             }
         }
         x.clear();
         
-        for (int i = 0; i < all_constraints.size(); ++i)
-        {
+        for (int i = 0; i < all_constraints.size(); ++i){
             SCIP_CALL_EXC( SCIPreleaseCons(scip, & all_constraints[i]) );
         }
         all_constraints.clear();
@@ -163,13 +142,11 @@ main(
 
         std::cout << "Finish!" << "\n";
     }
-    catch ( SCIPException & exec )
-    {
+    catch ( SCIPException & exec ){
         std::cerr << exec.what() << '\n';
 		exit(exec.getRetcode());
     }
-    catch ( ... )
-    {
+    catch ( ... ){
         std::abort();
     }
 
@@ -177,15 +154,9 @@ main(
 }
 
 void
-create_distance_matrix  (
-                        int num_nodes,
-                        std::vector<std::vector<int>>* distance_matrix
-                        )
-{
-    for (int i = 0; i < num_nodes - 1; ++i)
-    {
-        for (int j = i + 1; j < num_nodes; ++j)
-        {
+create_distance_matrix  (int num_nodes, std::vector<std::vector<int>>* distance_matrix){
+    for (int i = 0; i < num_nodes - 1; ++i){
+        for (int j = i + 1; j < num_nodes; ++j){
             int distance = rand() % (40 - 5 + 1) + 1;
             distance_matrix->at(i)[j] = distance; 
             distance_matrix->at(j)[i] = distance;
@@ -203,16 +174,9 @@ create_distance_matrix  (
     distance_matrix->at(3)[4] = 20;*/
 }
 
-void 
-print_distance_matrix   (
-                        int num_nodes,
-                        const std::vector<std::vector<int>> distance_matrix
-                        )
-{
-    for (int i = 0; i < num_nodes; ++i)
-    {
-        for (int j = 0; j < num_nodes; ++j)
-        {
+void print_distance_matrix (int num_nodes,const std::vector<std::vector<int>> distance_matrix){
+    for (int i = 0; i < num_nodes; ++i){
+        for (int j = 0; j < num_nodes; ++j){
             std::cout << distance_matrix[i][j] << " | ";
         }
         std::cout << "\n";

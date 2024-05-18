@@ -3,14 +3,8 @@
 #include <scip/scipdefplugins.h>
 #include "scip_exception.hpp"
 
-int 
-main(
-	int args,
-	char** argv
-	)
-{
-	try
-	{
+int main(int args,char** argv){
+	try{
 		// Initializing the SCIP environment
 		SCIP* scip;
 		SCIP_CALL_EXC( SCIPcreate(& scip) );
@@ -73,8 +67,7 @@ main(
 		
 		// Accessing results
 		SCIP_STATUS sln_status = SCIPgetStatus(scip);
-		if (sln_status == SCIP_STATUS_OPTIMAL)
-		{
+		if (sln_status == SCIP_STATUS_OPTIMAL){
 			SCIP_SOL* sol = SCIPgetBestSol(scip);
 			double objVal = SCIPgetSolOrigObj(scip, sol);
 			double var1_sln = SCIPgetVarSol(scip, var1);
@@ -93,13 +86,11 @@ main(
 		SCIP_CALL( SCIPreleaseCons(scip, & cons3) );
 		SCIP_CALL( SCIPfree(& scip) );
 	} 
-	catch( SCIPException & exec )
-	{
+	catch( SCIPException & exec ){
 		std::cerr << exec.what() << '\n';
 		exit(exec.getRetcode());
 	} 
-	catch( ... )
-	{
+	catch( ... ){
 		std::abort();
 	}
 	

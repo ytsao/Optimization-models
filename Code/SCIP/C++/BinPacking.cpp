@@ -3,16 +3,10 @@
 #include <scip/scipdefplugins.h>
 #include "scip_exception.hpp"
 
-int 
-main(
-    int args,
-    char** argv
-    )
-{
+int main(int args, char** argv){
     std::cout << "Start" << '\n';
     
-    if( args < 2 )
-    {
+    if( args < 2 ){
         std::cerr << "call" << argv[0] << " <number of parameters for bin packing problem" << std::endl;
         exit(1);
     }
@@ -25,8 +19,7 @@ main(
     int num_sets                = std::atoi(argv[2]);                   /**< number of sets can be used */
     int num_items               = std::atoi(argv[3]);                   /**< number of items needed to be packed */
     int item_size[num_items]    = { 0 };                                /**< the size for each item */
-    for( int i = 0; i < num_items; ++i )
-    {
+    for( int i = 0; i < num_items; ++i ){
         /* generate random number between lb and ub
          * lb = 1, ub = max_capacity
          * std::rand() & (ub - lb + 1)) + 1
@@ -34,8 +27,7 @@ main(
         item_size[i] = (std::rand() % (max_capacity - 1 + 1)) + 1;
     }
 
-    try
-    {
+    try{
         // initialize SCIP object, load default plugins link separators, heuristics, etc.
         SCIP* scip;
         SCIP_CALL_EXC( SCIPcreate(& scip) );
@@ -49,10 +41,8 @@ main(
         std::vector<std::vector<SCIP_VAR* >> x(num_items, std::vector<SCIP_VAR* >(num_sets));
         std::vector<SCIP_VAR* > y(num_sets);
         std::ostringstream namebuf;
-        for( int i = 0; i < num_items; ++i )
-        {
-            for( int j = 0; j < num_sets; ++j )
-            {
+        for( int i = 0; i < num_items; ++i ){
+            for( int j = 0; j < num_sets; ++j ){
                 SCIP_VAR* var_x;
                 namebuf.str("");
                 namebuf << "x#" << i << "#" << j;
@@ -70,8 +60,7 @@ main(
             }
         }
 
-        for( int i = 0; i < num_sets; ++i )
-        {
+        for( int i = 0; i < num_sets; ++i ){
             SCIP_VAR* var_y;
             namebuf.str("");
             namebuf << "y#" << i;
@@ -92,8 +81,7 @@ main(
 #pragma region create constraints   
         std::vector<SCIP_CONS* > all_constraints;
         /* capacity constraints */
-        for( int i = 0; i < num_sets; ++i )
-        {
+        for( int i = 0; i < num_sets; ++i ){
             SCIP_CONS* cons;
             namebuf.str("");
             namebuf << "capacity_con_" << i;
@@ -113,8 +101,7 @@ main(
         }
 
         /* assignment constraints */
-        for( int i = 0; i < num_items; ++i )
-        {
+        for( int i = 0; i < num_items; ++i ){
             SCIP_CONS* cons;
             namebuf.str("");
             namebuf << "assignment_con_" << i;
@@ -144,26 +131,21 @@ main(
     SCIP_STATUS sln_status = SCIPgetStatus(scip);
     SCIP_SOL* solution = SCIPgetBestSol(scip);
 
-    if (solution == NULL)
-    {
+    if (solution == NULL){
         std::cout << "no solution found" << "\n";
     }
-    else
-    {
+    else{
         double objective_value = SCIPgetSolOrigObj(scip, solution);
         std::cout << "Objective value = " << objective_value << "\n";
         
-        for (int i = 0; i < num_items; ++i)
-        {
-            for (int j = 0; j < num_sets; ++j)
-            {
+        for (int i = 0; i < num_items; ++i){
+            for (int j = 0; j < num_sets; ++j){
                 if (SCIPgetSolVal(scip, solution, x[i][j]) != 0)
                     std::cout << SCIPvarGetName(x[i][j]) << " = " << SCIPgetSolVal(scip, solution, x[i][j]) << "\n";
             }
         }
 
-        for (int i = 0; i < num_sets; ++i)
-        {
+        for (int i = 0; i < num_sets; ++i){
             if (SCIPgetSolVal(scip, solution, y[i]) != 0)
                 std::cout << SCIPvarGetName(y[i]) << " = " << SCIPgetSolVal(scip, solution, y[i]) << "\n";
         }
@@ -172,22 +154,18 @@ main(
 #pragma endregion
 
 #pragma region  free the SCIP environment, and close it.
-        for (int i = 0; i < num_items; ++i)
-        {
-            for (int j = 0; j < num_sets; ++j)
-            {
+        for (int i = 0; i < num_items; ++i){
+            for (int j = 0; j < num_sets; ++j){
                 SCIP_CALL_EXC( SCIPreleaseVar(scip, & x[i][j]) );
             }
         }
         x.clear();
-        for (int i = 0; i < num_sets; ++i)
-        {
+        for (int i = 0; i < num_sets; ++i){
             SCIP_CALL_EXC( SCIPreleaseVar(scip, & y[i]) );
         }
         y.clear();
 
-        for (int i = 0; i < all_constraints.size(); ++i)
-        {
+        for (int i = 0; i < all_constraints.size(); ++i){
             SCIP_CALL_EXC( SCIPreleaseCons(scip, & all_constraints[i]) );
         }
         all_constraints.clear();
@@ -197,13 +175,11 @@ main(
 
         std::cout << "Finish!" << "\n";
     }
-    catch ( SCIPException & exec )
-    {
+    catch ( SCIPException & exec ){
         std::cerr << exec.what() << '\n';
 		exit(exec.getRetcode());
     }
-    catch ( ... )
-    {
+    catch ( ... ){
         std::abort();
     }
 

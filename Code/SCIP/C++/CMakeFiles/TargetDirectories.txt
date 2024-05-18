@@ -1,3 +1,0 @@
-/home/ytsao/code/Optimization-models/Code/practice/CMakeFiles/maxflow.dir
-/home/ytsao/code/Optimization-models/Code/practice/CMakeFiles/edit_cache.dir
-/home/ytsao/code/Optimization-models/Code/practice/CMakeFiles/rebuild_cache.dir
