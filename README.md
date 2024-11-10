@@ -2,6 +2,8 @@
 
 This repository aims to provide the sample code to any beginner to learn how to use different programming languages and optimization solvers to build well-known combinatorial optimization models.
 
+In addition, this repository provides a framework to make different solvers (SCIP, gurobi) have same modeling interface in python.
+
 ## Environment Setting
 Our tutorial is based on Linux Ubuntu except Cplex is based on Windows 11 and Visual Studio 2022. If you are Windows user, you can use following steps to install WSL (Windows Subsystem for Linux).
 
@@ -27,16 +29,16 @@ sudo apt-get install build-essential
 * https://bayareanotes.com/wsl-installation/
 
 ## Combinatorial Optimization Problems
-* bin packing
-* multiple knapsack
-* set covering
-* graph coloring
-* matching
-* maximum clique
-* shortest path
-* TSP (DFS, MTZ)
-* maximum flow 
-* minimum cost flow
+* [Bin Packing](https://en.wikipedia.org/wiki/Bin_packing_problem)
+* [Multiple Knapsack](https://en.wikipedia.org/wiki/Knapsack_problem)
+* [Set Covering](https://en.wikipedia.org/wiki/Set_cover_problem)
+* [Graph Coloring](https://en.wikipedia.org/wiki/Graph_coloring)
+* [Matching](https://en.wikipedia.org/wiki/Matching_(graph_theory))
+* [Maximum Clique](https://en.wikipedia.org/wiki/Clique_problem)
+* [Shortest Path](https://en.wikipedia.org/wiki/Shortest_path_problem)
+* [TSP (DFS, MTZ)](https://en.wikipedia.org/wiki/Travelling_salesman_problem)
+* [Maximum Flow ](https://en.wikipedia.org/wiki/Maximum_flow_problem)
+* [Minimum Cost Flow](https://en.wikipedia.org/wiki/Minimum-cost_flow_problem)
 
 keep developing...
 
@@ -63,3 +65,5 @@ In each folder, there is a installation guidline for each solver in different pr
 
 ### Minizinc
 * Minizinc IDE
+
+Still developing... and welcome to contribute this repository!
